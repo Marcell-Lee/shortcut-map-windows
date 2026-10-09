@@ -1,0 +1,14 @@
+node_modules/
+local/
+dist/
+release/
+desktop-release/
+tests/verification.json
+research/generated-*.json
+research/jianying-keymap.json
+research/page-before-all-shortcuts.html
+.env
+.env.*
+*.log
+*.pem
+*.pfx

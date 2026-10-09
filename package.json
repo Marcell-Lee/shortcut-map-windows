@@ -1,0 +1,55 @@
+{
+  "name": "shortcut-map",
+  "version": "1.0.2",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "description": "离线 Windows 快捷键地图",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "build:release": "node scripts/build.cjs --release",
+    "pack": "npm run build:release && powershell -NoProfile -File scripts/package.ps1",
+    "desktop": "npm run build:release && electron .",
+    "desktop:local": "npm run build && electron . --local",
+    "desktop:dist": "npm run build:release && electron-builder --win nsis portable --x64",
+    "test": "npm run build && npm run build:release && node tests/map.test.cjs && node tests/release.test.cjs && node tests/desktop.test.cjs",
+    "generate:baseline": "node local/research/rebuild-library.cjs"
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "jsdom": "29.1.1"
+  },
+  "build": {
+    "appId": "app.shortcutmap.windows",
+    "productName": "快捷键地图",
+    "directories": {
+      "output": "desktop-release"
+    },
+    "asar": true,
+    "files": [
+      "desktop/main.cjs",
+      "desktop/preload.cjs",
+      "release/Alt快捷键占用地图.html",
+      "assets/shortcut-map.ico",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "desktop/detect-keyboards.ps1",
+        "to": "detect-keyboards.ps1"
+      }
+    ],
+    "win": {
+      "icon": "assets/shortcut-map.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}

@@ -1,0 +1,1128 @@
+{
+  "rows": [
+    [
+      {
+        "id": "Escape",
+        "u": 1
+      },
+      {
+        "id": "1",
+        "u": 1
+      },
+      {
+        "id": "2",
+        "u": 1
+      },
+      {
+        "id": "3",
+        "u": 1
+      },
+      {
+        "id": "4",
+        "u": 1
+      },
+      {
+        "id": "5",
+        "u": 1
+      },
+      {
+        "id": "6",
+        "u": 1
+      },
+      {
+        "id": "7",
+        "u": 1
+      },
+      {
+        "id": "8",
+        "u": 1
+      },
+      {
+        "id": "9",
+        "u": 1
+      },
+      {
+        "id": "0",
+        "u": 1
+      },
+      {
+        "id": "-",
+        "u": 1
+      },
+      {
+        "id": "=",
+        "u": 1
+      },
+      {
+        "id": "Backspace",
+        "u": 1.8
+      },
+      {
+        "id": "Home",
+        "u": 1
+      }
+    ],
+    [
+      {
+        "id": "Tab",
+        "u": 1.4
+      },
+      {
+        "id": "Q",
+        "u": 1
+      },
+      {
+        "id": "W",
+        "u": 1
+      },
+      {
+        "id": "E",
+        "u": 1
+      },
+      {
+        "id": "R",
+        "u": 1
+      },
+      {
+        "id": "T",
+        "u": 1
+      },
+      {
+        "id": "Y",
+        "u": 1
+      },
+      {
+        "id": "U",
+        "u": 1
+      },
+      {
+        "id": "I",
+        "u": 1
+      },
+      {
+        "id": "O",
+        "u": 1
+      },
+      {
+        "id": "P",
+        "u": 1
+      },
+      {
+        "id": "[",
+        "u": 1
+      },
+      {
+        "id": "]",
+        "u": 1
+      },
+      {
+        "id": "\\",
+        "u": 1.4
+      },
+      {
+        "id": "Delete",
+        "u": 1
+      }
+    ],
+    [
+      {
+        "id": "CapsLock",
+        "u": 1.6
+      },
+      {
+        "id": "A",
+        "u": 1
+      },
+      {
+        "id": "S",
+        "u": 1
+      },
+      {
+        "id": "D",
+        "u": 1
+      },
+      {
+        "id": "F",
+        "u": 1
+      },
+      {
+        "id": "G",
+        "u": 1
+      },
+      {
+        "id": "H",
+        "u": 1
+      },
+      {
+        "id": "J",
+        "u": 1
+      },
+      {
+        "id": "K",
+        "u": 1
+      },
+      {
+        "id": "L",
+        "u": 1
+      },
+      {
+        "id": ";",
+        "u": 1
+      },
+      {
+        "id": "'",
+        "u": 1
+      },
+      {
+        "id": "Enter",
+        "u": 2.2
+      },
+      {
+        "id": "PageUp",
+        "u": 1
+      }
+    ],
+    [
+      {
+        "id": "ShiftLeft",
+        "u": 2.1
+      },
+      {
+        "id": "Z",
+        "u": 1
+      },
+      {
+        "id": "X",
+        "u": 1
+      },
+      {
+        "id": "C",
+        "u": 1
+      },
+      {
+        "id": "V",
+        "u": 1
+      },
+      {
+        "id": "B",
+        "u": 1
+      },
+      {
+        "id": "N",
+        "u": 1
+      },
+      {
+        "id": "M",
+        "u": 1
+      },
+      {
+        "id": ",",
+        "u": 1
+      },
+      {
+        "id": ".",
+        "u": 1
+      },
+      {
+        "id": "/",
+        "u": 1
+      },
+      {
+        "id": "ShiftRight",
+        "u": 1.6
+      },
+      {
+        "id": "ArrowUp",
+        "u": 1
+      },
+      {
+        "id": "PageDown",
+        "u": 1
+      }
+    ],
+    [
+      {
+        "id": "ControlLeft",
+        "u": 1.2
+      },
+      {
+        "id": "MetaLeft",
+        "u": 1.2
+      },
+      {
+        "id": "AltLeft",
+        "u": 1.2
+      },
+      {
+        "id": "Space",
+        "u": 6.4
+      },
+      {
+        "id": "AltRight",
+        "u": 1
+      },
+      {
+        "id": "Fn",
+        "u": 1
+      },
+      {
+        "id": "ControlRight",
+        "u": 1
+      },
+      {
+        "id": "ArrowLeft",
+        "u": 1
+      },
+      {
+        "id": "ArrowDown",
+        "u": 1
+      },
+      {
+        "id": "ArrowRight",
+        "u": 1
+      }
+    ]
+  ],
+  "labels": {
+    "Escape": "Esc",
+    "CapsLock": "Caps",
+    "ShiftLeft": "Shift",
+    "ShiftRight": "Shift",
+    "ControlLeft": "Ctrl",
+    "ControlRight": "Ctrl",
+    "MetaLeft": "Win / Cmd",
+    "AltLeft": "Alt",
+    "AltRight": "Alt",
+    "ArrowUp": "↑",
+    "ArrowDown": "↓",
+    "ArrowLeft": "←",
+    "ArrowRight": "→",
+    "PageUp": "PgUp",
+    "PageDown": "PgDn",
+    "Backspace": "Backspace",
+    "Space": "Space"
+  },
+  "seed": {
+    "version": 1,
+    "model": "68 键示例布局",
+    "mappings": {
+      "0": {
+        "base": {
+          "output": "0",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "1": {
+        "base": {
+          "output": "1",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "2": {
+        "base": {
+          "output": "2",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "3": {
+        "base": {
+          "output": "3",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "4": {
+        "base": {
+          "output": "4",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "5": {
+        "base": {
+          "output": "5",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "6": {
+        "base": {
+          "output": "6",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "7": {
+        "base": {
+          "output": "7",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "8": {
+        "base": {
+          "output": "8",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "9": {
+        "base": {
+          "output": "9",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Escape": {
+        "base": {
+          "output": "Esc",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "-": {
+        "base": {
+          "output": "-",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "=": {
+        "base": {
+          "output": "=",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Backspace": {
+        "base": {
+          "output": "Backspace",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Home": {
+        "base": {
+          "output": "Home",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Tab": {
+        "base": {
+          "output": "Tab",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Q": {
+        "base": {
+          "output": "Q",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "W": {
+        "base": {
+          "output": "W",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "E": {
+        "base": {
+          "output": "E",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "R": {
+        "base": {
+          "output": "R",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "T": {
+        "base": {
+          "output": "T",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Y": {
+        "base": {
+          "output": "Y",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "U": {
+        "base": {
+          "output": "U",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "I": {
+        "base": {
+          "output": "I",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "O": {
+        "base": {
+          "output": "O",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "P": {
+        "base": {
+          "output": "P",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "[": {
+        "base": {
+          "output": "[",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "]": {
+        "base": {
+          "output": "]",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "\\": {
+        "base": {
+          "output": "\\",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Delete": {
+        "base": {
+          "output": "Delete",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "CapsLock": {
+        "base": {
+          "output": "Caps",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "A": {
+        "base": {
+          "output": "A",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "S": {
+        "base": {
+          "output": "S",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "D": {
+        "base": {
+          "output": "D",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "F": {
+        "base": {
+          "output": "F",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "G": {
+        "base": {
+          "output": "G",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "H": {
+        "base": {
+          "output": "H",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "J": {
+        "base": {
+          "output": "J",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "K": {
+        "base": {
+          "output": "K",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "L": {
+        "base": {
+          "output": "L",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      ";": {
+        "base": {
+          "output": ";",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "'": {
+        "base": {
+          "output": "'",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Enter": {
+        "base": {
+          "output": "Enter",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "PageUp": {
+        "base": {
+          "output": "PgUp",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ShiftLeft": {
+        "base": {
+          "output": "Shift",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Z": {
+        "base": {
+          "output": "Z",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "X": {
+        "base": {
+          "output": "X",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "C": {
+        "base": {
+          "output": "C",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "V": {
+        "base": {
+          "output": "V",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "B": {
+        "base": {
+          "output": "B",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "N": {
+        "base": {
+          "output": "N",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "M": {
+        "base": {
+          "output": "M",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      ",": {
+        "base": {
+          "output": ",",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      ".": {
+        "base": {
+          "output": ".",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "/": {
+        "base": {
+          "output": "/",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ShiftRight": {
+        "base": {
+          "output": "Shift",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ArrowUp": {
+        "base": {
+          "output": "↑",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "PageDown": {
+        "base": {
+          "output": "PgDn",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ControlLeft": {
+        "base": {
+          "output": "Ctrl",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "MetaLeft": {
+        "base": {
+          "output": "Win / Cmd",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "AltLeft": {
+        "base": {
+          "output": "Alt",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Space": {
+        "base": {
+          "output": "Space",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "AltRight": {
+        "base": {
+          "output": "Alt",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "Fn": {
+        "base": {
+          "output": "Fn",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ControlRight": {
+        "base": {
+          "output": "Ctrl",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ArrowLeft": {
+        "base": {
+          "output": "←",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ArrowDown": {
+        "base": {
+          "output": "↓",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      },
+      "ArrowRight": {
+        "base": {
+          "output": "→",
+          "note": "68 键示例，请按实际键盘核对",
+          "status": "待核实"
+        },
+        "fn": {
+          "output": "透传",
+          "note": "Fn 层尚未配置，请按实际键盘设置",
+          "status": "待核实"
+        }
+      }
+    },
+    "records": []
+  }
+}
