@@ -2,11 +2,11 @@
 
 Windows 离线快捷键参考工具。键盘图可按全局或软件查看已记录和未分配的组合键；点击按键可添加、编辑记录。修改保存在当前使用环境的本地数据中，也可导出、导入备份。它不会修改系统、软件或键盘驱动的设置，也不会在启动时扫描本机快捷键。
 
-从 [GitHub Releases](https://github.com/Marcell-Lee/shortcut-map-windows/releases/latest) 下载 Windows 安装版或免安装版。当前版本为 1.0.2；程序尚未使用代码签名证书。
+从 [GitHub Releases](https://github.com/Marcell-Lee/shortcut-map-windows/releases/latest) 下载 Windows 安装版或免安装版。当前版本为 1.0.3；程序尚未使用代码签名证书。
 
 ## Windows 桌面版
 
-GitHub 发布页的 `ShortcutMap-Setup-v1.0.2.exe` 是安装版，`ShortcutMap-Portable-v1.0.2.exe` 是免安装版。打开后可在 68 键和标准 104 键布局间切换；两套键位映射分别保存，快捷键记录共用。点击“识别键盘”时，应用只读取 Windows 报告的键盘设备名称并尝试推荐布局。设备名称不明确时会请用户手动选择一次，不会按通用 HID 名称或设备编号猜测。首次打开不会自动检测，也不会读取各软件的自定义快捷键。
+GitHub 发布页的 `ShortcutMap-Setup-v1.0.3.exe` 是安装版，`ShortcutMap-Portable-v1.0.3.exe` 是免安装版。打开后可在 68 键和标准 104 键布局间切换；两套键位映射分别保存，快捷键记录共用。点击“识别键盘”时，应用只读取 Windows 报告的键盘设备名称并尝试推荐布局。设备名称不明确时会请用户手动选择一次，不会按通用 HID 名称或设备编号猜测。首次打开不会自动检测，也不会读取各软件的自定义快捷键。
 
 ![Windows 桌面版 104 键布局](docs/desktop-104.png)
 

@@ -1,6 +1,6 @@
 {
   "name": "shortcut-map",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "main": "desktop/main.cjs",
   "description": "离线 Windows 快捷键地图",

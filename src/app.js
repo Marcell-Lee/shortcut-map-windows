@@ -70,13 +70,14 @@ function renderKeyboard(){
     else{partner=candidates.some(c=>c.target===value);extended=!partner&&availableCache.some(c=>c.target===value&&c.modifiers.length>active.length&&active.every(m=>c.modifiers.includes(m)))}
    }
    const occupied=candidates?occupiedAssignment(value,active):null;
-   const marking=candidates?(picked?' combo-picked'+(occupied?' combo-assigned':''):partner?' combo-available':occupied?' combo-assigned':extended?' combo-extended':target||active!==null?' combo-muted':''):(g&&a?' both':g?' global':a?' app':'')+(selected===k.id?' selected':'');
+   const marking=candidates?(picked?' combo-picked'+(occupied?' combo-assigned':''):partner?' combo-available':occupied?' combo-assigned':extended?' combo-extended':''):(g&&a?' both':g?' global':a?' app':'')+(selected===k.id?' selected':'');
    const b=el('button',undefined,'key'+marking);b.dataset.keyId=k.id;b.style.setProperty('--u',k.u);
    const printed=output(k.id),shortLabel=state.layoutId==='full'&&printed===k.id&&k.id.startsWith('Numpad')?k.id.replace(/^Numpad/,'').replace('Divide','/').replace('Multiply','*').replace('Subtract','−').replace('Add','+').replace('Decimal','.').replace('Enter','Enter'):state.layoutId==='full'&&printed==='NumLock'?'Num':printed;
    b.append(el('strong',shortLabel));
     const keyStatus=candidates?(occupied?occupied.combo+'：'+appLabel(occupied.records[0].app)+' · '+occupied.records[0].action+(occupied.records.length>1?' 等 '+occupied.records.length+' 条':''):matches.length?'可查看未分配组合':'未分配组合需继续选择修饰键'):matches.length+' 条相关记录';
     b.title=keyStatus;b.setAttribute('aria-label',name(k.id)+'，'+(layer==='fn'?'Fn 层，':'默认层，')+output(k.id)+'，'+keyStatus);
    b.setAttribute('aria-pressed',String(candidates?picked:selected===k.id));b.setAttribute('aria-controls','key-popover');
+   b.onpointerdown=()=>document.getSelection()?.removeAllRanges();
    b.onmouseenter=()=>{if(!popoverPinned&&!(candidates&&modifier))showKeyPopover(b)};b.onmouseleave=hideKeyPopover;b.onfocus=()=>{if(!popoverPinned&&!(candidates&&modifier))showKeyPopover(b)};b.onblur=hideKeyPopover;
    b.onclick=()=>{
     if(candidates){

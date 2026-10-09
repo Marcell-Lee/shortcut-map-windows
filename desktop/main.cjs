@@ -83,6 +83,17 @@ app.whenReady().then(() => {
       if (result.bridge !== 'function' || !result.controls || result.initial !== 68 || result.full !== 104) {
         throw new Error('桌面页面或键盘布局加载失败：' + JSON.stringify(result));
       }
+      if (process.env.SHORTCUT_MAP_SMOKE_SCENARIO === 'unassigned') {
+        await mainWindow.webContents.executeJavaScript(`(() => {
+          document.getElementById('unassigned-toggle').click();
+          document.querySelector('.key[data-key-id="AltLeft"]').click();
+          document.querySelector('.key[data-key-id="MetaLeft"]').click();
+          document.querySelector('.key[data-key-id="="]').click();
+          return document.querySelectorAll('.key.combo-muted').length;
+        })()`).then(count => {
+          if (count) throw new Error('无关按键仍被置灰');
+        });
+      }
       if (process.env.SHORTCUT_MAP_SCREENSHOT) {
         mainWindow.setSize(1680, 1000);
         await mainWindow.webContents.executeJavaScript("document.getElementById('keyboard').scrollIntoView({block:'center'})");

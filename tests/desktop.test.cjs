@@ -53,6 +53,23 @@ async function run() {
   assert.match(t.get('desktop-detection').textContent, /未提供可信的物理键数/);
   t.w.close();
 
+  const selection = open({ detectKeyboards: async () => ({ devices: [], suggestion: null }) });
+  selection.get('layout-select').value = 'full';
+  selection.get('layout-select').dispatchEvent(new selection.w.Event('change'));
+  selection.get('unassigned-toggle').click();
+  selection.d.querySelector('.key[data-key-id="AltLeft"]').click();
+  selection.d.querySelector('.key[data-key-id="MetaLeft"]').click();
+  const range = selection.d.createRange();
+  range.selectNodeContents(selection.get('unassigned-guide'));
+  selection.w.getSelection().addRange(range);
+  const equals = selection.d.querySelector('.key[data-key-id="="]');
+  equals.dispatchEvent(new selection.w.Event('pointerdown', { bubbles: true }));
+  assert.equal(selection.w.getSelection().rangeCount, 0);
+  equals.click();
+  assert.equal(selection.d.querySelectorAll('.key.combo-muted').length, 0);
+  assert.equal(selection.get('key-popover').hidden, false);
+  selection.w.close();
+
   const identified = open({ detectKeyboards: async () => ({
     devices: [{ id: 'TEST', name: '测试 104 键' }],
     suggestion: { layoutId: 'full', model: '测试 104 键' },
