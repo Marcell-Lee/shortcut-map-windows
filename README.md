@@ -1,62 +1,59 @@
-# 快捷键地图
+# 快捷键地图 · Shortcut Map
 
-Windows 离线快捷键参考工具。键盘图可按全局或软件查看已记录和未分配的组合键；点击按键可添加、编辑记录。修改保存在当前使用环境的本地数据中，也可导出、导入备份。它不会修改系统、软件或键盘驱动的设置，也不会在启动时扫描本机快捷键。
+**找出还没分配的快捷键，让每个组合都有安排。**
 
-从 [GitHub Releases](https://github.com/Marcell-Lee/shortcut-map-windows/releases/latest) 下载 Windows 安装版或免安装版。当前版本为 1.0.3；程序尚未使用代码签名证书。
+简体中文 · [English](README.en.md)
 
-## Windows 桌面版
+想给一个功能设置快捷键，却不知道哪些组合还能用？快捷键地图把 Windows 和软件的快捷键放到一张键盘上，让你查看已有用途、寻找未分配组合，再记录自己的安排。
 
-GitHub 发布页的 `ShortcutMap-Setup-v1.0.3.exe` 是安装版，`ShortcutMap-Portable-v1.0.3.exe` 是免安装版。打开后可在 68 键和标准 104 键布局间切换；两套键位映射分别保存，快捷键记录共用。点击“识别键盘”时，应用只读取 Windows 报告的键盘设备名称并尝试推荐布局。设备名称不明确时会请用户手动选择一次，不会按通用 HID 名称或设备编号猜测。首次打开不会自动检测，也不会读取各软件的自定义快捷键。
+[下载 Windows 版](https://github.com/Marcell-Lee/shortcut-map-windows/releases/latest) · [反馈问题](https://github.com/Marcell-Lee/shortcut-map-windows/issues)
 
-![Windows 桌面版 104 键布局](docs/desktop-104.png)
+## 重点功能：查看未分配快捷键
 
-桌面版与浏览器 HTML 使用不同的本地存储位置。要把原有个人记录带进桌面版，请先在原页面“导出备份”，再在桌面版“导入备份”。分发包只含公开默认资料，不含 `local/` 中的个人资料。
+例如，你想找一个 `Alt+Win` 开头的组合：打开“未分配”，选中 `Alt` 和 `Win`，其他按键就会用颜色显示这些组合的分配情况。
 
-## 直接使用
+![查看未分配快捷键：绿色为未分配，浅红色为已分配，蓝色为选中的按键](docs/unassigned-shortcuts.png)
 
-运行 `npm run pack` 后，将 `release/快捷键地图-便携版.zip` 发给其他人。解压并双击其中的 HTML 即可使用。分发版只含公开的默认快捷键和一套 68 键示例布局；使用者可通过页面导入自己的记录。`docs/使用说明.txt` 会一同放入压缩包。
+- **绿色**：当前资料中未分配，可以考虑用来安排新功能。
+- **浅红色**：已有用途，点击就能查看属于哪个软件、用来做什么。
+- **蓝色边框**：当前选中的按键。
 
-## 开发与数据边界
+你可以查看全部快捷键，也可以只看全局快捷键或某个软件。比如，为剪映寻找新组合时，就选择剪映；软件范围内也会考虑已收录的全局快捷键。
 
-### 用 AI 直接补充软件快捷键
+这里的“未分配”是根据已收录的资料判断的，**不是对整台电脑的实时占用扫描**。尚未收录的快捷键仍可能占用；补充常用软件的资料后，再到实际软件中确认。
 
-Windows 桌面版展开“用 AI 补充软件快捷键”并复制提示词，交给支持本机文件读写的编程 Agent。可使用 Codex、Claude Code、Cursor、GitHub Copilot 的本地 Agent 模式、Gemini CLI、Windsurf、Cline、Roo Code、OpenCode、TRAE 等；普通聊天网页或远程沙箱不能直接访问用户电脑。能力说明可参考 [Cursor Agent](https://cursor.com/docs/agent/overview)、[GitHub Copilot Agent](https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode)。
+## 查看一个键，能做哪些事
 
-应用在自身用户数据目录下准备 `agent-workspace/`，提示词自动填入绝对路径，不依赖开发者机器路径。目录中包含 `AGENTS.md` 更改规范、`shortcut.schema.json` 字段定义、`example.json` 格式示例及独立 `validate.cjs` 校验器。Agent 必须先列出软件让用户选择，再只读收集所选软件的当前自定义方案或官方 Windows 默认资料；备份后直接写入 `software-shortcuts.json`，无需手动复制 JSON。
+鼠标移到按键上，就能看到相关组合和功能；点击后，可以新增或编辑记录。同一个组合在不同软件里做什么，也能放在一起查看。
 
-文件使用 `{version:1, selectedApps:[软件名], apps:[{name,shortcuts:[{combo,action,scope,source,note}]}]}`。`selectedApps` 限定本次合并范围，不是删除列表。应用每两秒检查文件，完整校验通过后才合并；保留手动记录、未选软件和 Windows 系统默认资料，不因缺少条目而删除旧记录。后台软件快捷键可用 `scope:global`，软件内部使用 `scope:app`。
+![查看快捷键功能：Ctrl+C 在文本编辑、Firefox 和 OBS Studio 中的不同用途](docs/shortcut-details.png)
 
-导入前完整状态备份在本地存储的 `<storageKey>-before-agent`，仅保留上一次导入前的状态；Agent 还应在目录的 `backups/` 保留文件备份。格式错误、超过限制或存储失败时不导入。`import-status.json` 记录文件 SHA-256、`applied/rejected` 与说明，供 Agent 确认结果；关闭应用时不会加载。用户软件资料仅保存在本机，不进入安装包或公开仓库。原手动 JSON 导入保留为备用入口。
+## 第一次使用
 
-| 位置 | 内容 | 是否进入便携版 |
-| --- | --- | --- |
-| `src/` | 页面、样式和交互 | 是，内联到 HTML |
-| `data/layout.json` | 通用 68 键示例布局 | 是 |
-| `data/layout-full.json` | 标准 104 键布局 | 是，内联到 HTML |
-| `data/shortcuts.json` | 公开默认快捷键及资料来源 | 是 |
-| `local/profile.json` | 当前电脑的键盘映射及个人记录 | 否 |
-| `local/research/` | 从本机提取的历史资料 | 否 |
-| `research/tables-*.json` | 资料整理用的公开来源表格 | 否 |
-| `dist/` | 本地开发页面 | 否 |
-| `release/` | 无个人信息的便携版文件 | 是，仅压缩包中的两个文件 |
-| `desktop/` | 桌面窗口与按需键盘检测 | 是，仅所需文件 |
-| `desktop-release/` | Windows 安装版和免安装版 | 仅分发生成的 EXE |
+1. 从发布页下载：文件名带 **Setup** 的是安装版，带 **Portable** 的是免安装版。
+2. 打开应用，选择 68 键或 104 键布局。
+3. 选择“全部键盘快捷键”“全局快捷键”或一个软件，再打开“未分配”。
+4. 点击屏幕上的 `Ctrl`、`Alt`、`Shift`、`Win`，可叠加选择；也可以按住实体键盘上的修饰键。再查看目标按键，就能检查对应组合。
 
-`local/`、`dist/`、`release/` 和 `desktop-release/` 均被 Git 忽略。分发脚本只选择所需文件入包，并检查已知本机标记。不要把整个开发目录直接打包分享。
+应用用来查看和记录快捷键。要让新组合真正生效，还需要在对应软件或快捷键工具中设置。
 
-## 构建与检查
+## 用 AI 补充你常用的软件
 
-安装 Node.js 后，在项目目录执行：
+展开 **“用 AI 补充软件快捷键”**，复制提示词，交给能访问本机文件的编程 Agent，例如 Codex、Claude Code、Cursor、GitHub Copilot 或 Gemini CLI。
 
-```powershell
-npm ci
-npm test
-npm run pack
-npm run desktop:dist
-```
+它会先列出软件让你选择，再查找所选软件当前使用的自定义快捷键；无法确认时，会寻找官方默认资料。Agent 按工作目录里的规范直接更新，保持应用打开即可自动加载，**不用手动复制 JSON**。
 
-`npm run build` 生成 `dist/Alt快捷键占用地图.html`：存在 `local/profile.json` 时叠加本机记录；没有该文件时生成通用版。`npm run build:release` 总是忽略本地配置，生成 `release/Alt快捷键占用地图.html`。更改资料时，公开默认项放入 `data/shortcuts.json`，个人映射和自定义项放入 `local/profile.json`。浏览器中另行编辑的内容不写回这些文件，换地址或浏览器前请先在页面导出备份。
+普通聊天网页不能直接修改本机文件，需要使用有本机文件权限的 Agent。
 
-`npm run generate:baseline` 是历史资料重建工具，需本地 `local/research/page-before-all-shortcuts.html` 才能运行；它只生成本地研究输出，不会覆盖当前公开资料。
+## 你的记录，留在你的电脑上
 
-开发时用 `npm run desktop` 打开公开默认资料，或用 `npm run desktop:local` 打开叠加本机资料的版本。桌面版依赖 Node.js 构建，但生成的 EXE 可独立运行。
+- 修改自动保存在本机；页面底部可以导出、导入备份。
+- AI 更新会保留手动记录、未选软件和系统默认资料。
+- 启动时不会扫描已安装的软件或读取它们的快捷键配置。
+- 支持 68 键和标准 104 键布局；“识别键盘”无法确定型号时，可以手动选择。
+
+从旧 HTML 页面迁移时，先在旧页面导出备份，再在桌面版导入。
+
+## 想参与开发？
+
+构建命令、目录说明和 AI 数据规范放在 [开发文档](docs/DEVELOPMENT.md)。日常使用直接下载 Windows 版即可，不需要安装开发工具。
