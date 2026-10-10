@@ -1,6 +1,6 @@
 {
   "name": "shortcut-map",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "main": "desktop/main.cjs",
   "description": "离线 Windows 快捷键地图",
@@ -11,7 +11,7 @@
     "desktop": "npm run build:release && electron .",
     "desktop:local": "npm run build && electron . --local",
     "desktop:dist": "npm run build:release && electron-builder --win nsis portable --x64",
-    "test": "npm run build && npm run build:release && node tests/map.test.cjs && node tests/release.test.cjs && node tests/desktop.test.cjs",
+    "test": "npm run build && npm run build:release && node tests/map.test.cjs && node tests/release.test.cjs && node tests/desktop.test.cjs && node tests/agent-workspace.test.cjs",
     "generate:baseline": "node local/research/rebuild-library.cjs"
   },
   "devDependencies": {
@@ -29,6 +29,9 @@
     "files": [
       "desktop/main.cjs",
       "desktop/preload.cjs",
+      "desktop/agent-workspace.cjs",
+      "desktop/validate-agent.cjs",
+      "src/ai-format.js",
       "release/Alt快捷键占用地图.html",
       "assets/shortcut-map.ico",
       "package.json"

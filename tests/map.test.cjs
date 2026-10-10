@@ -19,7 +19,7 @@ function load(saved) {
   if (saved) w.localStorage.setItem(STORE, saved);
   const script = d.querySelector('script:not([type])').textContent;
   new Function(script);
-  w.eval(script + '\nwindow.inspect=()=>({state,view,unassigned,availableCache,visibleCache});');
+  w.eval(script + '\nwindow.inspect=()=>({state,view,unassigned,availableCache,visibleCache});window.createAgentPrompt=createAgentPrompt;');
   return { dom, w, d, get: id => d.getElementById(id) };
 }
 function submit(t) { t.get('record-form').dispatchEvent(new t.w.Event('submit', { bubbles: true, cancelable: true })); }
@@ -44,7 +44,7 @@ check('Keyboard is the primary view and the redundant list is absent', () => {
 });
 check('Windows defaults load without any local configuration scan', () => {
   assert.ok(t.w.inspect().state.records.some(r => r.app === 'Windows' && r.scope === 'global'));
-  assert.ok(t.get('ai-prompt').value.includes('不读取本机 Windows 快捷键设置'));
+  assert.ok(t.w.eval("createAgentPrompt('D:/test-agent-workspace')").includes('不读取本机 Windows 快捷键设置'));
   assert.doesNotMatch(html, /showOpenFilePicker|showDirectoryPicker|ActiveXObject/);
 });
 check('Scope selector keeps software and global records separate', () => {
@@ -125,13 +125,17 @@ check('Unassigned view explains controls and marks occupied combinations', () =>
   r.w.close();
 });
 check('Prompt requires software selection before reading shortcuts', () => {
-  const prompt = t.get('ai-prompt').value;
+  const prompt = t.w.eval("createAgentPrompt('D:/test-agent-workspace')");
   assert.match(prompt, /第一阶段.*只识别/s);
   assert.match(prompt, /等待我明确回复所选软件/);
   assert.match(prompt, /第二阶段.*只处理我选中的软件/s);
   assert.match(prompt, /自定义快捷键方案/);
   assert.match(prompt, /官方.*默认快捷键资料/);
-  assert.match(prompt, /纯 JSON/);
+  assert.match(prompt, /AGENTS\.md/);
+  assert.match(prompt, /software-shortcuts\.json/);
+  assert.match(prompt, /D:\/test-agent-workspace/);
+  assert.match(prompt, /selectedApps/);
+  assert.match(prompt, /无需我手动导入 JSON/);
 });
 check('Prompt copy has a working manual fallback', () => {
   t.get('copy-ai-prompt').click();

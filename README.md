@@ -18,6 +18,16 @@ GitHub 发布页的 `ShortcutMap-Setup-v1.0.3.exe` 是安装版，`ShortcutMap-P
 
 ## 开发与数据边界
 
+### 用 AI 直接补充软件快捷键
+
+Windows 桌面版展开“用 AI 补充软件快捷键”并复制提示词，交给支持本机文件读写的编程 Agent。可使用 Codex、Claude Code、Cursor、GitHub Copilot 的本地 Agent 模式、Gemini CLI、Windsurf、Cline、Roo Code、OpenCode、TRAE 等；普通聊天网页或远程沙箱不能直接访问用户电脑。能力说明可参考 [Cursor Agent](https://cursor.com/docs/agent/overview)、[GitHub Copilot Agent](https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode)。
+
+应用在自身用户数据目录下准备 `agent-workspace/`，提示词自动填入绝对路径，不依赖开发者机器路径。目录中包含 `AGENTS.md` 更改规范、`shortcut.schema.json` 字段定义、`example.json` 格式示例及独立 `validate.cjs` 校验器。Agent 必须先列出软件让用户选择，再只读收集所选软件的当前自定义方案或官方 Windows 默认资料；备份后直接写入 `software-shortcuts.json`，无需手动复制 JSON。
+
+文件使用 `{version:1, selectedApps:[软件名], apps:[{name,shortcuts:[{combo,action,scope,source,note}]}]}`。`selectedApps` 限定本次合并范围，不是删除列表。应用每两秒检查文件，完整校验通过后才合并；保留手动记录、未选软件和 Windows 系统默认资料，不因缺少条目而删除旧记录。后台软件快捷键可用 `scope:global`，软件内部使用 `scope:app`。
+
+导入前完整状态备份在本地存储的 `<storageKey>-before-agent`，仅保留上一次导入前的状态；Agent 还应在目录的 `backups/` 保留文件备份。格式错误、超过限制或存储失败时不导入。`import-status.json` 记录文件 SHA-256、`applied/rejected` 与说明，供 Agent 确认结果；关闭应用时不会加载。用户软件资料仅保存在本机，不进入安装包或公开仓库。原手动 JSON 导入保留为备用入口。
+
 | 位置 | 内容 | 是否进入便携版 |
 | --- | --- | --- |
 | `src/` | 页面、样式和交互 | 是，内联到 HTML |

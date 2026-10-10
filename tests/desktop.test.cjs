@@ -13,11 +13,50 @@ function open(api) {
   w.shortcutDesktop = api;
   w.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
   w.HTMLDialogElement.prototype.close = function () { this.open = false; };
-  w.eval(w.document.querySelector('script:not([type])').textContent + '\nwindow.inspectDesktop=()=>state;');
+  w.eval(w.document.querySelector('script:not([type])').textContent + '\nwindow.inspectDesktop=()=>state;window.syncAgentWorkspace=syncAgentWorkspace;');
   return { dom, w, d: w.document, get: id => w.document.getElementById(id) };
 }
 
 async function run() {
+  let raw = JSON.stringify({ version: 1, selectedApps: [], apps: [] });
+  const receipts = [];
+  const agent = open({ detectKeyboards: async () => ({ devices: [] }),
+    readAgentWorkspace: async () => ({ directory: 'D:/test-agent-workspace', raw, hash: require('node:crypto').createHash('sha256').update(raw).digest('hex') }),
+    reportAgentResult: async receipt => { receipts.push(receipt); return true; },
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.match(agent.get('ai-prompt').value, /D:\/test-agent-workspace/);
+  assert.match(agent.get('ai-prompt').value, /AGENTS\.md/);
+  const beforeAgent = JSON.stringify(agent.w.inspectDesktop());
+  raw = JSON.stringify({ version: 1, selectedApps: ['选中软件'], apps: [
+    { name: '选中软件', shortcuts: [{ combo: 'Ctrl+S', action: '保存文档', scope: 'app', source: '本机活动方案' }] },
+    { name: '未选软件', shortcuts: [{ combo: 'Ctrl+J', action: '不应加载', scope: 'app', source: '官方资料' }] },
+  ] });
+  await agent.w.eval('syncAgentWorkspace()');
+  assert.equal(agent.w.inspectDesktop().records.filter(r => r.app === '选中软件').length, 1);
+  assert.equal(agent.w.inspectDesktop().records.filter(r => r.app === '未选软件').length, 0);
+  assert.equal(agent.w.localStorage.getItem('shortcut-map-release-v2-before-agent'), beforeAgent);
+  assert.equal(receipts.at(-1).state, 'applied');
+  const imported = JSON.stringify(agent.w.inspectDesktop());
+  const receiptCount = receipts.length;
+  await agent.w.eval('syncAgentWorkspace()');
+  assert.equal(receipts.length, receiptCount, 'unchanged file should not rewrite receipt');
+  assert.equal(JSON.stringify(agent.w.inspectDesktop()), imported);
+  raw = '{broken';
+  await agent.w.eval('syncAgentWorkspace()');
+  assert.equal(receipts.at(-1).state, 'rejected');
+  assert.equal(JSON.stringify(agent.w.inspectDesktop()), imported);
+  raw = JSON.stringify({ version: 1, selectedApps: ['Windows'], apps: [{ name: 'Windows', shortcuts: [{ combo: 'Win+L', action: '锁定', scope: 'global', source: 'test' }] }] });
+  await agent.w.eval('syncAgentWorkspace()');
+  assert.equal(receipts.at(-1).state, 'rejected');
+  assert.equal(JSON.stringify(agent.w.inspectDesktop()), imported);
+  raw = JSON.stringify({ version: 1, selectedApps: ['新软件'], apps: [{ name: '新软件', shortcuts: [{ combo: 'Ctrl+J', action: '测试', scope: 'app', source: 'test' }] }] });
+  agent.w.Storage.prototype.setItem = () => { throw Error('quota'); };
+  await agent.w.eval('syncAgentWorkspace()');
+  assert.equal(receipts.at(-1).state, 'rejected');
+  assert.equal(JSON.stringify(agent.w.inspectDesktop()), imported, 'failed backup must not change live data');
+  agent.w.close();
+
   const t = open({ detectKeyboards: async () => ({ devices: [{ id: 'TEST', name: 'Generic' }], suggestion: null }) });
   assert.equal(t.get('desktop-controls').hidden, false);
   t.get('layout-select').value = 'full';

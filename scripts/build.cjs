@@ -27,7 +27,7 @@ const data = JSON.stringify({ layout, layouts: { compact68: layout, full: fullLa
 const replacements = {
   __INLINE_STYLES__: read('src/styles.css'),
   __INLINE_DATA__: data,
-  __INLINE_APP__: read('src/app.js') + '\n' + read('src/prompt.js'),
+  __INLINE_APP__: read('src/app.js') + '\n' + read('src/ai-format.js') + '\n' + read('src/prompt.js'),
 };
 let html = template;
 for (const [marker, content] of Object.entries(replacements)) {

@@ -1,17 +1,20 @@
-const aiProjectPath = location.protocol === 'file:'
-  ? decodeURIComponent(new URL(BUNDLE.edition === 'release' ? './' : '../', location.href).pathname).replace(/^\/(?=[A-Za-z]:)/, '').replace(/\/$/, '')
-  : '请先告诉我这个页面所在的目录';
+function createAgentPrompt(directory) {
+  if (!directory) return '请在 Windows 桌面版中展开“用 AI 补充软件快捷键”，复制包含本机 AI 工作目录的提示词。网页备用导入不支持 Agent 自动写入。';
+  return `请直接为 Windows 快捷键地图补充软件快捷键。你需要本机文件读写能力。专用工作目录（绝对路径）：
+${directory}
 
-const aiPrompt = `请帮我补充快捷键地图中的“软件快捷键”。页面自动识别到的目录：${aiProjectPath}。请自行定位该目录中的快捷键地图页面；如果目录中没有项目源码，就生成下方 JSON 供我粘贴到页面导入。不要让我手动查找项目路径。严格分两阶段，不能跳过我的选择。
+先完整阅读该目录的 AGENTS.md、shortcut.schema.json、example.json 和现有 software-shortcuts.json。以目录中的更改规范为准，不自行猜测数据结构、文件路径或修改方式。只允许更新 software-shortcuts.json 及创建本次备份、临时文件；不要修改程序源码、安装包或 Windows 系统设置。若不能访问该目录，说明需要在有本机文件权限的编程 Agent 中运行，不要声称已完成，也不要转为让我手动粘贴 JSON。
 
-第一阶段：只识别这台电脑已安装的软件名称和版本，列出候选，并问我要选择哪些软件。若你不能读取本机安装清单，就直接让我填写软件名称。此阶段不要读取任何软件的快捷键配置，不要修改项目，也不要生成快捷键清单。等待我明确回复所选软件。
+第一阶段：只识别这台电脑已安装的软件名称和版本，列出候选，询问我选择哪些。若无法读取安装清单，让我填写软件名称。此时不要读取快捷键配置，不修改文件。等待我明确回复所选软件。
 
-第二阶段：只处理我选中的软件。优先用只读方式寻找它当前启用的自定义快捷键方案，核对活动配置；不能确认正在启用时，不要把保存过的方案说成当前配置。若无法读取自定义设置，再查该软件官方的 Windows 默认快捷键资料；无可靠来源的项目不要猜。Windows 系统内置全局快捷键以项目已有默认资料为准，不读取本机 Windows 快捷键设置，也不改动它。不要读取或输出密码、令牌、聊天内容等无关数据。
+第二阶段：只处理我选中的软件。优先只读核对当前启用的自定义快捷键方案；不能确认时查软件官方 Windows 默认快捷键资料，无可靠来源不猜。不读取本机 Windows 快捷键设置，不改已有系统默认资料，不读取无关的密码、令牌或聊天数据。
 
-最后请先告诉我：选中的每个软件各找到多少条、哪些是当前自定义配置、哪些只是官方默认、哪些仍无法确认。然后生成符合下列格式的纯 JSON（不要 Markdown 代码块）。如果你能操作本地页面，请先让我导出备份，再把 JSON 粘入页面的“导入 AI 整理结果”，确认预览后完成导入；如果不能操作页面，就把 JSON 发给我，让我直接粘贴导入。不要直接覆盖其他软件或我的手动记录。JSON 格式如下：
-{"version":1,"apps":[{"name":"软件名称","shortcuts":[{"combo":"Ctrl+S","action":"保存","scope":"app","source":"官方资料 URL 或本机配置名称","note":"适用条件或当前方案说明"}]}]}
-每条快捷键必须有真实功能和可追溯来源；scope 只能是 app 或 global。不要把未分配组合、没有确认的候选或 Windows 系统默认项填入 JSON。`;
+按 AGENTS.md 的明确字段规范直接更新 software-shortcuts.json：version=1；selectedApps 只写本次已获我选择的软件名；apps 保留未选软件，合并选中软件的结果。每条包含 combo、action、scope（app/global）、source，可附 note 说明版本、条件和默认/自定义依据。组合如 Ctrl+S；连续按键如 Ctrl+K > Ctrl+C；同软件、scope、combo 不重复。禁止填写未分配组合。先备份旧文件，写临时文件，运行目录中的 node validate.cjs 临时文件路径 校验，通过后原子替换目标文件。
 
+应用保持打开即可自动校验、备份并加载，无需我手动导入 JSON。写入后检查 import-status.json：只有 state=applied 且 hash 与本次目标文件的 SHA-256 一致，才报告已加载。应用关闭时先启动应用；若 state=rejected，阅读 message 修复并重试。保留用户手动记录，不删除其他软件。最后报告每个软件的条数、来源、自定义/默认区别、跳过项目及实际导入状态。`;
+}
+
+let aiPrompt = createAgentPrompt(null);
 $('ai-prompt').value = aiPrompt;
 $('copy-ai-prompt').onclick = async () => {
   try {
@@ -25,39 +28,59 @@ $('copy-ai-prompt').onclick = async () => {
   }
 };
 
-function parseAiResult(raw) {
-  if (raw.length > 2_000_000) throw Error('内容超过 2 MB。');
-  const payload = JSON.parse(raw);
-  if (payload?.version !== 1 || !Array.isArray(payload.apps) || !payload.apps.length || payload.apps.length > 20) {
-    throw Error('需要 version: 1 和 1 至 20 个软件。');
-  }
-  const protectedApps = new Set(['Windows', 'Windows 设置', 'Windows 对话框', 'Windows 命令提示符', '文件资源管理器']);
-  const names = new Set();
-  const combinations = new Set();
-  const entries = [];
-  for (const app of payload.apps) {
-    const name = app?.name?.trim();
-    if (typeof name !== 'string' || !name || name.length > 80 || protectedApps.has(name) || names.has(name) || !Array.isArray(app.shortcuts)) {
-      throw Error('软件名称重复、无效或包含受保护的 Windows 系统范围。');
-    }
-    names.add(name);
-    if (app.shortcuts.length > 1000) throw Error(`${name} 的快捷键数量超过上限。`);
-    for (const item of app.shortcuts) {
-      if (typeof item?.combo !== 'string' || typeof item?.action !== 'string' || typeof item?.source !== 'string' ||
-          !item.combo.trim() || !item.action.trim() || item.action.length > 160 || !item.source.trim() || item.source.length > 300 ||
-          !['app', 'global'].includes(item.scope) || (item.note !== undefined && (typeof item.note !== 'string' || item.note.length > 500))) {
-        throw Error(`${name} 有无效条目；每条必须包含组合键、功能、范围和来源。`);
+let agentBusy = false;
+let reportedAgentHash = null;
+async function syncAgentWorkspace() {
+  if (!window.shortcutDesktop?.readAgentWorkspace || agentBusy) return;
+  agentBusy = true;
+  let snapshot;
+  try {
+    snapshot = await window.shortcutDesktop.readAgentWorkspace();
+    aiPrompt = createAgentPrompt(snapshot.directory);
+    if ($('ai-prompt').value !== aiPrompt) $('ai-prompt').value = aiPrompt;
+    $('copy-ai-prompt').disabled = false;
+    if (snapshot.error) throw Error(snapshot.error);
+    const previous = state.agentReceipt;
+    if (previous?.hash === snapshot.hash) {
+      $('ai-workspace-status').textContent = previous.message;
+      if (reportedAgentHash !== snapshot.hash) {
+        if (await window.shortcutDesktop.reportAgentResult(previous)) reportedAgentHash = snapshot.hash;
       }
-      const normalized = combo(item.combo);
-      const identity = JSON.stringify([name, item.scope, normalized]);
-      if (combinations.has(identity)) throw Error(`${name} 的 ${normalized} 重复。`);
-      combinations.add(identity);
-      entries.push({ app: name, combo: normalized, action: item.action.trim(), scope: item.scope,
-        note: item.note?.trim() || '', source: item.source.trim() });
+      return;
     }
-  }
-  if (!entries.length || entries.length > 2000) throw Error('快捷键总数必须在 1 至 2000 条之间。');
-  return { names: [...names], entries };
+    const payload = JSON.parse(snapshot.raw);
+    if (payload.version === 1 && Array.isArray(payload.apps) && !payload.apps.length && Array.isArray(payload.selectedApps) && !payload.selectedApps.length) {
+      $('ai-workspace-status').textContent = 'AI 工作目录已就绪；Agent 写入后自动加载。';
+      return;
+    }
+    const parsed = parseAiResult(snapshot.raw, canonicalAgentCombo, true);
+    const result = mergeAiResult(parsed);
+    const message = `已加载 ${parsed.names.join('、')}：新增 ${result.added} 条，更新旧资料 ${result.replaced} 条，保留 ${result.skipped} 条。`;
+    const receipt = { hash: snapshot.hash, state: 'applied', message };
+    // Back up and persist before updating the live UI. Quota errors leave state intact.
+    if (result.added || result.replaced) {
+      localStorage.setItem(STORE + '-before-agent', JSON.stringify(state));
+    }
+    result.next.agentReceipt = receipt;
+    localStorage.setItem(STORE, JSON.stringify(result.next));
+    state = result.next;
+    if (result.added || result.replaced) render();
+    $('ai-workspace-status').textContent = message;
+    if (await window.shortcutDesktop.reportAgentResult(receipt)) reportedAgentHash = snapshot.hash;
+  } catch (error) {
+    const message = 'AI 更新未完成：' + error.message;
+    $('ai-workspace-status').textContent = message;
+    if (snapshot?.hash) {
+      try { await window.shortcutDesktop.reportAgentResult({ hash: snapshot.hash, state: 'rejected', message: message.slice(0, 2000) }); } catch { /* Keep the visible error and retry on the next check. */ }
+    }
+  } finally { agentBusy = false; }
+}
+if (window.shortcutDesktop?.readAgentWorkspace) {
+  $('copy-ai-prompt').disabled = true;
+  syncAgentWorkspace();
+  setInterval(syncAgentWorkspace, 2000);
+} else {
+  $('ai-workspace-status').textContent = '自动写入功能请使用 Windows 桌面版。';
 }
 
 function mergeAiResult(parsed) {
@@ -66,7 +89,7 @@ function mergeAiResult(parsed) {
   for (const item of parsed.entries) {
     const same = next.records.filter(r => r.app === item.app && r.combo === item.combo && r.scope === item.scope && r.kind === 'keys');
     if (same.some(r => !r.id.startsWith('lib-') && !r.id.startsWith('ai-'))) { skipped++; continue; }
-    if (same.some(r => r.action === item.action && r.source === item.source)) { skipped++; continue; }
+    if (same.some(r => r.action === item.action && r.source === item.source && r.note === item.note)) { skipped++; continue; }
     if (same.length) { next.records = next.records.filter(r => !same.includes(r)); replaced += same.length; }
     next.records.push({ id: 'ai-' + crypto.randomUUID(), combo: item.combo, app: item.app, action: item.action,
       scope: item.scope, status: '待核实', category: '', note: item.note, source: item.source, kind: 'keys', enabled: true });
@@ -78,7 +101,7 @@ function mergeAiResult(parsed) {
 $('import-ai-result').onclick = () => {
   const status = $('ai-import-status');
   try {
-    const parsed = parseAiResult($('ai-result').value.trim());
+    const parsed = parseAiResult($('ai-result').value.trim(), combo);
     const result = mergeAiResult(parsed);
     if (!result.added) { status.textContent = '没有新增记录；相同条目或手动记录已保留。'; return; }
     const summary = `${parsed.names.join('、')}：新增 ${result.added} 条，替换同组合的旧资料 ${result.replaced} 条，跳过 ${result.skipped} 条。不会改变 Windows 默认项和其他软件。建议先导出备份。确定导入吗？`;
